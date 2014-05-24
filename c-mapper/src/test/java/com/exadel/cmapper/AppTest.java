@@ -1,4 +1,4 @@
-package com.exadel.c-mapper;
+package com.exadel.cmapper;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
