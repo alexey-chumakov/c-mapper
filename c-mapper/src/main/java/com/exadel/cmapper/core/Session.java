@@ -2,6 +2,8 @@ package com.exadel.cmapper.core;
 
 import java.io.Serializable;
 
+import com.exadel.cmapper.mapping.Statement;
+
 /**
  * Session interface for basic select/upsert/delete methods.
  * 
@@ -20,31 +22,14 @@ public interface Session {
     public <T> T getById(Class<T> clazz, Serializable id);
 
     /**
-     * Executes CQL query and get single result.
-     * 
-     * @param clazz object class to use
-     * @param cql CQL statement to execute
-     * @return object or null if nothing found
-     */
-    public <T> T getSingleResult(Class<T> clazz, String cql);
-
-    /**
-     * Executes CQL named query and get single result.
-     * 
-     * @param queryName named CQL query
-     * @return object or null if nothing found
-     */
-    public <T> T getSingleResultFromNamedQuery(String queryName);
-
-    /**
      * Executes CQL query and allows to iterate over ResultSet. The result isn't
      * fetched to memory at once and uses CQL driver paging to fetch the data.
      * 
      * @param clazz object class to use
      * @param cql CQL statement to execute
-     * @return entity iterator to iterate over ResultSet
+     * @return statement to set query options/parameters and execute it
      */
-    public <T> EntityIterator<T> execute(Class<T> clazz, String cql);
+    public <T> Statement<T> fetch(Class<T> clazz, String cql);
 
     /**
      * Executes named CQL query and allows to iterate over ResultSet. The result
@@ -52,9 +37,9 @@ public interface Session {
      * data.
      * 
      * @param queryName named CQL query
-     * @return entity iterator to iterate over ResultSet
+     * @return statement to set query options/parameters and execute it
      */
-    public <T> EntityIterator<T> executeNamedQuery(String queryName);
+    public <T> Statement<T> fetchByNamedQuery(String queryName);
 
     /**
      * Inserts or update object. If more than one object passed, executes

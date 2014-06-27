@@ -14,7 +14,7 @@ public interface StatementBuilder {
      * @param clazz class to make a statement
      * @return statement
      */
-    public Statement getInsertStatement(Class<?> clazz);
+    public <T> Statement<T> getInsertStatement(Class<T> clazz);
 
     /**
      * Creates basic select by id statement.
@@ -22,7 +22,7 @@ public interface StatementBuilder {
      * @param clazz class to make a statement
      * @return statement
      */
-    public Statement getSelectByIdStatement(Class<?> clazz);
+    public <T> Statement<T> getSelectByIdStatement(Class<T> clazz);
 
     /**
      * Creates custom select statement to fetch only columns mentioned in
@@ -33,7 +33,7 @@ public interface StatementBuilder {
      *            statement
      * @return statement
      */
-    public Statement getCustomSelectStatement(Class<?> clazz, String... columns);
+    public <T> Statement<T> getCustomSelectStatement(Class<T> clazz, String... columns);
 
     /**
      * Creates custom update statement to update only columns mentioned in
@@ -44,6 +44,6 @@ public interface StatementBuilder {
      *            statement
      * @return statement
      */
-    public Statement getCustomUpdateStatement(Class<?> clazz, String... columns);
+    public <T> Statement<T> getCustomUpdateStatement(Class<T> clazz, String... columns);
 
 }
